@@ -61,14 +61,14 @@ client.on("messageCreate", async (message) => {
     kickMember.kick();
   }
 
-  if (command === "playlist") {
-    let queue = client.player.createQueue(message.guild.id);
-    await queue.join(message.member.voice.channel);
-    let song = await queue.playlist(args.join(" ")).catch((err) => {
-      console.log(err);
-      if (!guildQueue) queue.stop();
-    });
-  }
+  // if (command === "playlist") {
+  //   let queue = client.player.createQueue(message.guild.id);
+  //   await queue.join(message.member.voice.channel);
+  //   let song = await queue.playlist(args.join(" ")).catch((err) => {
+  //     console.log(err);
+  //     if (!guildQueue) queue.stop();
+  //   });
+  // }
   if (command === "skip") {
     if (guildQueue) guildQueue.skip();
   }
