@@ -32,6 +32,9 @@ client.on('message', msg => {
 
 });
 
+client.on('guildMemberAdd', member => {
+  member.send('Welcome to my server!');
+});
 
 let token = process.env.DISCORD_BOT_TOKEN;
 client.login(token);
