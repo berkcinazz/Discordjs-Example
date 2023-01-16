@@ -55,6 +55,7 @@ client.on("messageCreate", async (message) => {
 
   if (command === "play") {
     let queue = client.player.createQueue(message.guild.id);
+    message.channel.send('Playing `' + url +'` ...');
     await queue.join(message.member.voice.channel);
     let song = await queue.play(url).catch((err) => {
       if (!guildQueue) queue.stop();
