@@ -56,10 +56,10 @@ client.on("messageCreate", async (message) => {
     });
   }
 
-  if (command === "kick") {
-    let kickMember = message.mentions.members.first();
-    kickMember.kick();
-  }
+  // if (command === "kick") {
+  //   let kickMember = message.mentions.members.first();
+  //   kickMember.kick();
+  // }
 
   // if (command === "playlist") {
   //   let queue = client.player.createQueue(message.guild.id);
