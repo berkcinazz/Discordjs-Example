@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits } = require("discord.js");
+const { Client, GatewayIntentBits, EmbedBuilder  } = require("discord.js");
 const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config({ path: path.resolve(__dirname, "config.env") });
@@ -21,6 +21,7 @@ const settings = {
 
 const { Player } = require("discord-music-player");
 const { send } = require("process");
+const { channel } = require("diagnostics_channel");
 const player = new Player(client, {
   leaveOnEmpty: false,
 });
@@ -35,6 +36,8 @@ checkIsKeyExistsFromObject = (obj, key) =>
 
 client.on("ready", () => {
   console.log("I am ready to Play Music!");
+
+  client.user.setActivity("Hamsi Bot | !commands"); 
 });
 
 client.on("messageCreate", async (message) => {
@@ -69,6 +72,7 @@ client.on("messageCreate", async (message) => {
   //     if (!guildQueue) queue.stop();
   //   });
   // }
+
   if (command === "skip") {
     if (guildQueue) guildQueue.skip();
   }
@@ -122,6 +126,105 @@ client.on("messageCreate", async (message) => {
     if (guildQueue) guildQueue.move(parseInt(args[0]), parseInt(args[1]));
   }
 
+  if(command === "commands"){
+    const commandsEmbed = {
+      color: 0x0099ff,
+      title: 'Commands',
+      author: {
+        name: `${client.user.username}`,
+        icon_url: 'https://www.esk.gov.tr/upload/Node/10976/pics/Hamsi.350px.jpg',
+      },
+      description: 'Here is some commands for you',
+      thumbnail: {
+        url: 'https://www.esk.gov.tr/upload/Node/10976/pics/Hamsi.350px.jpg',
+      },
+      fields: [
+        {
+          name: '\u200b',
+          value: '\u200b',
+          inline: false,
+        },
+        {
+          name: '!play',
+          value: 'It plays the music you want.',
+        },
+        {
+          name: '!skip',
+          value: 'It skips the music you want.',
+        },
+        {
+          name: '!removeloop',
+          value: 'It removes the loop.',
+        },
+        {
+          name: '!toggleloop',
+          value: 'It toggles the loop.',
+        },
+        {
+          name: '!togglequeueloop',
+          value: 'It toggles the queue loop.',
+        },
+        {
+          name: '!setvolume',
+          value: 'It sets the volume.',
+        },
+        {
+          name: '!seek',
+          value: 'It seeks the music.',
+        },  
+        {
+          name: '!clearqueue',
+          value: 'It clears the queue.',
+        },
+        {
+          name: '!shuffle',
+          value: 'It shuffles the queue.',
+        },
+        {
+          name: '!getqueue',
+          value: 'It gets the queue.',
+        },
+        {
+          name: '!getvolume',
+          value: 'It gets the volume.',
+        },
+        {
+          name: '!nowplaying',
+          value: 'It gets the now playing music.',
+        },
+        {
+          name: '!pause',
+          value: 'It pauses the music.',
+        },
+        {
+          name: '!resume',
+          value: 'It resumes the music.',
+        },  
+        {
+          name: '!remove',
+          value: 'It removes the music from the queue.',
+        },
+        {
+          name: '!createprogressbar',
+          value: 'It creates the progress bar.',
+        },
+        {
+          name: '!move',
+          value: 'It moves the music from the queue.',
+        },
+      ],
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: `${client.user.username}`,
+        icon_url: 'https://i.imgur.com/AfFp7pu.png',
+      },
+    };
+
+    message.channel.send({ embeds: [commandsEmbed] });
+  }
+
+
+
   let messageResponses = {
     ping: "pong",
     author: `Here is bot author <@${authorId}>`,
@@ -137,7 +240,7 @@ client.on("messageCreate", async (message) => {
   };
 
   if (checkIsKeyExistsFromObject(messageResponses, command.toLowerCase())) {
-    message.channel.send(
+    message.reply(
       getValueOfKeyFromObject(messageResponses, command.toLowerCase())
     );
   }
