@@ -31,8 +31,10 @@ getValueOfKeyFromObject = (obj, key) =>
   Object.entries(obj)
     .filter(([k]) => k === key)
     .map(([k, v]) => v)[0];
+
 checkIsKeyExistsFromObject = (obj, key) =>
-  Object.entries(obj).filter(([k]) => k === key).length > 0;
+  Object.entries(obj)
+    .filter(([k]) => k === key).length > 0;
 
 client.on("ready", () => {
   console.log("I am ready to Play Music!");
@@ -145,6 +147,26 @@ client.on("messageCreate", async (message) => {
           inline: false,
         },
         {
+          name: '!author',
+          value: 'It shows the bot author.',
+        },
+        {
+          name: '!github',
+          value: 'It shows the bot author github account.',
+        },
+        {
+          name: '!reach',
+          value: 'It shows the bot author email.',
+        },
+        {
+          name: '!linkedin',
+          value: 'It shows the bot author linkedin account.',
+        },
+        {
+          name: '!twitter',
+          value: 'It shows the bot author twitter account.',
+        },
+        {
           name: '!play',
           value: 'It plays the music you want.',
         },
@@ -223,18 +245,12 @@ client.on("messageCreate", async (message) => {
     message.channel.send({ embeds: [commandsEmbed] });
   }
 
-
-
   let messageResponses = {
-    ping: "pong",
     author: `Here is bot author <@${authorId}>`,
     github: "Here is bot author github account https://github.com/berkcinazz",
-    reach:
-      "You can reach out to the bot author from this email berk.cinaz@gmail.com",
-    linkedin:
-      "Here is bot author linkedin account https://www.linkedin.com/in/berk-cinaz-3b60291bb/",
-    twitter:
-      "Here is bot author twitter account https://twitter.com/berkcinazz",
+    reach: "You can reach out to the bot author from this email berk.cinaz@gmail.com",
+    linkedin: "Here is bot author linkedin account https://www.linkedin.com/in/berk-cinaz-3b60291bb/",
+    twitter: "Here is bot author twitter account https://twitter.com/berkcinazz",
     hello: "hi",
     hi: "hello",
   };
